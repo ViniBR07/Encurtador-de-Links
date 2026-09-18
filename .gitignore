@@ -1,5 +1,4 @@
 node_modules/
-data.sqlite
-data.sqlite-*
+data.json
 npm-debug.log*
 .env

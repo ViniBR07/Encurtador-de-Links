@@ -8,13 +8,22 @@ interface web simples para criar links e consultar estatísticas.
 ## Stack
 
 - **Backend:** Node.js + Express
-- **Banco de dados:** SQLite (via `better-sqlite3`), arquivo local `data.sqlite`
+- **Armazenamento:** arquivo JSON local (`data.json`), lido/escrito de forma
+  síncrona em `db.js`
 - **Frontend:** HTML, CSS e JavaScript puros (sem framework), servidos como
   estáticos pelo próprio Express
 
 Optei por uma stack sem frameworks de frontend para manter o projeto simples de
 rodar (um único `npm install` e `npm start`) e para deixar claro, no código, o
 fluxo completo de requisição → API → banco → resposta.
+
+Inicialmente usei SQLite via `better-sqlite3`, mas troquei para um arquivo JSON
+porque esse pacote exige compilação nativa (node-gyp) na instalação, o que
+falhou em ambiente Windows sem as Build Tools do Visual Studio instaladas.
+Como o volume de dados de um teste técnico é pequeno, um arquivo JSON
+(`db.js` expõe as mesmas funções que a camada SQLite expunha, então o resto do
+código não precisou mudar) resolve sem exigir nenhuma dependência nativa —
+o projeto roda com `npm install` puro em qualquer máquina.
 
 ## Como rodar
 
@@ -74,8 +83,9 @@ Resposta:
   em uso também retorna erro tratado (`400`/`409`).
 - **Contagem de cliques e último acesso:** cada redirecionamento incrementa o
   contador e atualiza o timestamp de último acesso, exibidos na interface.
-- **SQLite em vez de um banco em memória:** garante que os links sobrevivem a
-  um restart do servidor, sem exigir configuração extra de infraestrutura.
+- **Arquivo JSON em vez de um banco em memória:** garante que os links
+  sobrevivem a um restart do servidor, sem exigir configuração extra de
+  infraestrutura nem dependências nativas.
 
 ## O que ficou de fora (e por quê)
 
@@ -98,7 +108,7 @@ limitação de tempo, não implementei:
 ```
 url-shortener/
 ├── server.js          # rotas da API e servidor Express
-├── db.js              # conexão e schema do SQLite
+├── db.js              # camada de armazenamento (arquivo data.json)
 ├── package.json
 ├── public/             # frontend estático
 │   ├── index.html
