@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encurtador de Links</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>🔗 Encurtador de Links</h1>
+      <p class="subtitle">Crie links curtos e acompanhe os acessos em tempo real.</p>
+    </header>
+
+    <section class="card">
+      <form id="shorten-form">
+        <label for="url">URL original</label>
+        <input
+          type="url"
+          id="url"
+          name="url"
+          placeholder="https://exemplo.com/pagina-bem-longa"
+          required
+        />
+
+        <label for="code">Código customizado (opcional)</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          placeholder="ex: meu-link"
+          pattern="[a-zA-Z0-9_-]{3,20}"
+        />
+
+        <button type="submit">Encurtar</button>
+      </form>
+      <p id="form-message" class="message" role="status"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-header">
+        <h2>Meus links</h2>
+        <button id="refresh-btn" title="Atualizar lista">↻ Atualizar</button>
+      </div>
+      <div id="links-list" class="links-list">
+        <p class="empty-state">Carregando links...</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
