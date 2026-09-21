@@ -1,6 +1,6 @@
 # 🔗 Encurtador de Links
 
-Desafio técnico — Estágio em Desenvolvimento (HSP Software).
+Desafio técnico.
 
 API REST em Node.js/Express para encurtar URLs e contabilizar acessos, com uma
 interface web simples para criar links e consultar estatísticas.
